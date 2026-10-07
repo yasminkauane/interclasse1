@@ -1,3 +1,5 @@
+const { get } = require("prompt");
+
 class Placar {
     #golsA;
     #golsB;
@@ -7,12 +9,32 @@ class Placar {
         this.#golsB = golsB;
     }
 
+    get golsA(valor) {
+        if (!Number.isInteger(valor) || valor < 0) {
+            console.log('[ERRO] Gols do time A inválidos. Acesso negado. ');
+            return;
+        }
+        this.#golsA = valor;
+    }
     get golsA() {
         return this.#golsA;
     }
 
+    set golsB(valor) {
+        if (!Number.isInteger(valor) || valor < valor < 0) {
+            console.log('[ERRO] Gols do time B inválidos. Acesso negado. ');
+            return;
+        }
+        this.#golsB = valor;
+    }
     get golsB() {
         return this.#golsB;
+    }
+
+    vencedor() {
+        if (this.#golsA > this.#golsB) return 'A';
+        if (this.golsA < this.#golsB) return 'B';
+        return 'EMPATE';
     }
 }
 

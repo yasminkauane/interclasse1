@@ -1,42 +1,21 @@
-const AtletaViews = require("../views/AtletaViews");
+const AtletaView = require("../views/AtletaView");
 
 const AtletaController = {
-
     adicionar(sistema) {
-        const idTurma =
-            AtletaViews.perguntarIdTurma();
-
+        const idTurma = AtletaView.perguntarIdTurma();
         try {
-            sistema.buscarTurmaOuFalhar(
-                idTurma
-            );
-
-            const nome =
-                AtletaViews.perguntarNome();
-
-            const { atleta, turma } =
-                sistema.adicionarAtleta(
-                    idTurma,
-                    nome
-                );
-
-            AtletaViews.mostrarAtletaVinculado(
-                atleta.nome,
-                turma.nome
-            );
-
+            sistema.buscarTurmaOuFalhar(idTurma);
+            const nome = AtletaView.perguntarNome();
+            const { atleta, turma } = sistema.adicionarAtleta(idTurma, nome);
+            AtletaView.mostrarAtletaVinculado(atleta.nome, turma.nome);
         } catch (erro) {
-            AtletaViews.mostrarErroCadastro(
-                erro.message
-            );
+            AtletaView.mostrarErroCadastro(erro.message);
         }
     },
 
     listar(sistema) {
-        AtletaViews.listar(
-            sistema.listarAtletas()
-        );
-    }
+        AtletaView.listarAtletas(sistema.listarAtletas());
+    },
 };
 
 module.exports = AtletaController;
